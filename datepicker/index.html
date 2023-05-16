@@ -1,0 +1,627 @@
+<html>
+<head>
+  <title>4-click Birthday Date Picker</title>
+
+  <script type="text/javascript" src="jquery-3.7.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+</head>
+<style type="text/css">
+*
+{
+    margin: 0px;
+    padding: 0px;
+  font-family:  'Open Sans', Arial, Verdana, sans-serif;
+}
+
+#numclicks {
+  background-color: #00FFFF;
+}
+
+#headrow1td {
+  font-weight: bold;  
+  background-color: #FCFCFC;
+  color: #333;  
+}
+
+#headrow2td {
+  font-weight: bold;  
+  background-color: #FCFCFC;
+  color: #333;  
+}
+
+#headrow3td {
+  font-weight: bold;  
+  background-color: #FCFCFC;
+  color: #333;  
+}
+
+.headerrow {
+  font-weight: bold;
+  background-color: #FCFCFC;
+  color: #333;  
+}
+
+.highlight-row {
+  background-color: #E5F2FF;
+}
+
+.highlight-col {
+  background-color: #FFF8E5;
+}
+
+.highlight-both {
+  background-color: #F4F4F4;
+}
+
+#successday, #successyear, #successmonth {
+  background-color: #00FFFF;  
+}
+
+html, body
+{
+    height: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  height: 50%;
+  width: 80%;
+  margin: 10px;
+  table-layout : fixed;
+}
+
+th, td {
+  border: 1px solid black;
+}
+
+td {
+  position: relative;
+}
+  
+div {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rectangle {
+  background-color: #EAEAEA;
+  border: 1px solid #CCC;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-size: smaller;
+}
+
+
+</style>
+<body>
+
+<script type="text/javascript">
+
+const currentYear = (new Date()).getFullYear();
+const numYearPartitions = 4;
+const numDayPartitions = 3;
+const numMonthPartitions = 2;
+const months = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+];
+
+function getMonthIndex(abbreviatedMonth) {
+  const monthIndex = months.findIndex(month => month.toLowerCase() === abbreviatedMonth.toLowerCase());  
+  return monthIndex;
+}
+
+function getAbbreviatedMonth(monthIndex) {
+  const abbreviatedMonth = months[monthIndex];
+  return abbreviatedMonth;
+}
+
+function getDaysInMonth(month, year) {
+  // Check if the year is a leap year
+  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+
+  // Define the number of days in each month
+  const daysInMonth = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  // Validate the input month
+  if (month < 0 || month > 11) {
+    throw new Error('Invalid month. Month should be between 0 and 11.');
+  }
+
+  // Return the number of days in the specified month
+  return daysInMonth[month];
+}
+
+
+function getPartitionRanges(min, max, partitions) {
+  const range = max - min + 1; // Calculate the total range
+  const maxPartitions = Math.min(range, partitions); // Determine the maximum number of partitions
+
+  const partitionSize = Math.floor(range / maxPartitions); // Calculate the size of each partition
+  const remaining = range % maxPartitions; // Calculate the remaining values to distribute among the ranges
+
+  const ranges = []; // Array to store the partition ranges
+
+  let start = min; // Start with the minimum value as the starting point for the first range
+
+  // Loop to generate the partition ranges
+  for (let i = 0; i < maxPartitions; ++i) {
+    const additional = i < remaining ? 1 : 0; // Additional value for the current range
+
+    const end = start + partitionSize - 1 + additional; // Calculate the end point for the current range
+
+    ranges.push([start, end]); // Store the range as an array in the 'ranges' array
+
+    start = end + 1; // Update the starting point for the next range
+  }
+
+  return ranges;
+}
+
+function populateDayYearPartitions(begin, end, isDay) {
+  const prefix = isDay ? '#rowcell' : '#headcell';
+  const className = isDay ? '.row' : '.col';
+  const numPartitions = isDay ? numDayPartitions : numYearPartitions;
+
+  const partitions = getPartitionRanges(begin, end, numPartitions);
+  for (var i = 0; i < partitions.length; ++i) {
+    const index = i + 1;
+    $(className + index).show();    
+    var partition = partitions[i];
+    var start = partition[0];
+    var end = partition[1];
+    const idPrefix = prefix + index;
+    $(idPrefix + 'start').text(start);
+    $(idPrefix + 'end').text(end);
+    if (start >= end) {
+      $(idPrefix + 'spacer').hide();
+      $(idPrefix + 'end').hide();
+    } else {
+      $(idPrefix + 'spacer').show();
+      $(idPrefix + 'end').show();      
+    }
+  }  
+
+  for (var i = partitions.length; i < numPartitions; ++i) {
+    const index = i + 1;
+    $(className + index).hide();
+    var idPrefix = prefix + index;
+    $(idPrefix + 'start').text(1);
+    $(idPrefix + 'end').text(1);
+  }
+}
+
+function populateMonthPartitions(begin, end) {
+  const partitions = getPartitionRanges(begin, end, numMonthPartitions);
+  $('.rectangle').show();
+  $('[id^="month"]').show();
+
+  for (var i = 0; i < partitions.length; ++i) {
+    var partition = partitions[i];
+    var start = partition[0];
+    var end = partition[1];
+    var startMonth = getAbbreviatedMonth(start);
+    var endMonth = getAbbreviatedMonth(end);
+    $('[id^="month"][id$="' + (i+1) + 'start"]').text(startMonth);
+    $('[id^="month"][id$="' + (i+1) + 'end"]').text(endMonth);
+
+    if (start >= end) {
+      // hide the month and spacer
+      $('[id^="month"][id$="' + (i+1) + 'end"]').hide();
+      $('[id^="month"][id$="' + (i+1) + 'spacer"]').hide();
+    }
+  }
+
+  for (var i = partitions.length; i < numMonthPartitions; ++i) {
+    const index = i + 1;
+    $('[id^="month"][id$="' + (i+1)).hide();
+  }
+}
+
+function getMonthPartitions() {
+  const ranges = [];
+  const idstart1 = '#month111start';
+  const idend1 = '#month111end';
+  const idstart2 = '#month112start';
+  const idend2 = '#month112end';
+
+  var begin = getMonthIndex($('#month111start').text());
+  var end = getMonthIndex($('#month111end').text());
+  ranges.push([begin, end]);
+
+  var allHidden = $('[id^="month"][id$="2"]').length > 0 && $('[id^="month"][id$="2"]:visible').length === 0;
+  if (!allHidden) {
+    begin = getMonthIndex($('#month112start').text());
+    end = getMonthIndex($('#month112end').text());    
+    ranges.push([begin, end]);    
+  }
+  return ranges;
+}
+
+function getDayYearPartitions(isDay) {
+  const prefix = isDay ? '#rowcell' : '#headcell';  
+  const numPartitions = isDay ? numDayPartitions : numYearPartitions;
+  const ranges = [];
+  for (var i = 0; i < numPartitions; ++i) {
+    const index = i + 1;
+    const idPrefix = prefix + index;
+    const hidden = $(idPrefix + index + 'td').is(':hidden');
+    if (hidden) {
+      break;
+    }
+    const start = parseInt($(idPrefix + "start").text());
+    const end = parseInt($(idPrefix + "end").text());
+    ranges.push([start, end]);
+  }  
+  return ranges;
+}
+
+var numClicks = 0
+
+function initialize() {
+  numClicks = 0;
+  populateDayYearPartitions(1900, currentYear, false);
+  populateDayYearPartitions(1, 31, true);
+  populateMonthPartitions(0, 11);
+  $('#clickcounter').hide();
+  $('#success').hide();
+  $('#alldates').show();
+}
+
+function doUpdate(row, col, month) {
+  ++numClicks;
+  $('#clickcounter').show();
+  $('#numclicks').text(numClicks);
+  const oldYearPartitions = getDayYearPartitions(false);
+  const oldYearPartition = oldYearPartitions[col - 1];
+  populateDayYearPartitions(oldYearPartition[0], oldYearPartition[1], false);
+
+  const oldMonthPartitions = getMonthPartitions();
+  const oldMonthPartition = oldMonthPartitions[month - 1];
+
+  const oldDayPartitions = getDayYearPartitions(true);
+  const oldDayPartition = oldDayPartitions[row - 1];
+
+  var monthMax = 28;
+  for (var i = oldMonthPartition[0]; i <= oldMonthPartition[1]; ++i) {
+    for (var j = oldYearPartition[0]; j <= oldYearPartition[1]; ++j) {
+      monthMax = Math.max(monthMax, getDaysInMonth(i, j));
+    }
+  }
+
+  var dayMin = Math.min(oldDayPartition[0], monthMax);
+  var dayMax = Math.min(oldDayPartition[1], monthMax);
+
+  populateDayYearPartitions(dayMin, dayMax, true);
+  populateMonthPartitions(oldMonthPartition[0], oldMonthPartition[1]);
+
+  var count = 0;
+  var divId = '';
+  $('div[id^="data"]').each(function() {
+    if ($(this).is(':visible')) {
+      count++;
+    }
+  });
+  if (count == 1) {
+    $('#alldates').hide();
+    $('#success').show();
+    $('#successyear').text(oldYearPartition[0]);
+    $('#successday').text(dayMin);
+    $('#successmonth').text(getAbbreviatedMonth(oldMonthPartition[0]));
+  }
+}
+
+$(document).ready(function() {
+  $('div').mouseover(function() {
+    var rowClass = $(this).attr('class').split(' ').find(cls => cls.startsWith('row'));
+    if (rowClass) {
+      $('div.' + rowClass).addClass('highlight-row');      
+    }
+    var colClass = $(this).attr('class').split(' ').find(cls => cls.startsWith('col'));
+    if (colClass) {
+      $('div.' + colClass).addClass('highlight-col');      
+    }
+
+    var divId = $(this).attr('id');
+    if (divId && divId.startsWith('data')) {
+      $('#' + divId).addClass('highlight-both');
+    }
+  });
+
+  $('div').mouseout(function() {
+    $(this).removeClass('highlight-both');
+
+    var rowClass = $(this).attr('class').split(' ').find(cls => cls.startsWith('row'));
+    if (rowClass) {
+      $('div.' + rowClass).removeClass('highlight-row');      
+    }
+    var colClass = $(this).attr('class').split(' ').find(cls => cls.startsWith('col'));
+    if (colClass) {
+      $('div.' + colClass).removeClass('highlight-col');      
+    }
+    var divId = $(this).attr('id');
+    if (divId && divId.startsWith('data')) {
+      $('#' + divId).removeClass('highlight-both');
+    }
+  });
+
+  $('.rectangle').mouseover(function() {
+    $(this).css('background-color', '#FFDDE5');
+  });
+
+  $('.rectangle').mouseout(function() {
+    $(this).css('background-color', '#EAEAEA');
+  });
+
+  $('p').click(function() {
+    var divId = $(this).attr('id');
+
+    if (divId.startsWith('month')) {
+      var lastThreeIntegers = divId.match(/(\d{1})/g);
+
+      const row = parseInt(lastThreeIntegers[0]);
+      const col = parseInt(lastThreeIntegers[1]);
+      const month = parseInt(lastThreeIntegers[2]);
+      doUpdate(row, col, month);     
+    }
+  });
+
+  initialize();
+});
+
+</script>
+
+<h1 style="text-align: center;">
+  Pick your birthday in 4 clicks<span id="clickcounter">; <span id="numclicks">0</span> clicks</span>
+</h1>
+
+<table id="alldates">
+  <tr id="headrow">
+    <td class="spacer" id="headspacer">
+      
+    </td>
+    <td class="headerrow col1" id="headcell1td">
+      <div class="col1" id="headcell1">
+        <span style="startrange" id="headcell1start">1</span> 
+        <span id="headcell1spacer">-</span>
+        <span style="endrange" id="headcell1end">1</span>   
+      </div>  
+    </td>
+    <td class="headerrow col2" id="headcell2td">
+      <div class="col2" id="headcell2">
+        <span style="startrange" id="headcell2start">1</span> 
+        <span id="headcell2spacer">-</span>
+        <span style="endrange" id="headcell2end">1</span>   
+      </div>  
+    </td>
+    <td class="headerrow col3" id="headcell3td">
+      <div class="col3" id="headcell3">
+        <span style="startrange" id="headcell3start">1</span> 
+        <span id="headcell3spacer">-</span>
+        <span style="endrange" id="headcell3end">1</span>   
+      </div>  
+    </td>
+    <td class="headerrow col4" id="headcell4td">
+      <div class="col4" id="headcell4">
+        <span style="startrange" id="headcell4start">1</span> 
+        <span id="headcell4spacer">-</span>
+        <span style="endrange" id="headcell4end">1</span>   
+      </div>  
+    </td>
+  </tr>
+
+  <tr id="row1" class="datarow row1">
+    <td class="spacer row1" id="headrow1td">
+      <div class="row1" id="rowcell1">
+        <span style="startrange" id="rowcell1start">1</span> 
+        <span id="rowcell1spacer">-</span>
+        <span style="startrange" id="rowcell1end">1</span>   
+      </div>        
+    </td>
+    <td class="data col1">
+      <div class="row1 col1" id="data11">
+        <p class="rectangle" id="month111">
+          <span style="monthstart" id="month111start">Jan</span>
+          <span id="month111spacer">-</span>
+          <span style="monthend" id="month111end">Jun</span>
+        </p>
+        <p class="rectangle" id="month112">
+          <span style="monthstart" id="month112start">Jul</span>
+          <span id="month112spacer">-</span>
+          <span style="monthend" id="month112end">Dec</span>
+        </p>
+      </div>
+    </td>
+    <td class="data col2">
+      <div class="row1 col2" id="data12">
+        <p class="rectangle" id="month121">
+          <span style="monthstart" id="month121start">Jan</span>
+          <span id="month121spacer">-</span>
+          <span style="monthend" id="month121end">Jun</span>
+        </p>
+        <p class="rectangle" id="month122">
+          <span style="monthstart" id="month122start">Jul</span>
+          <span id="month122spacer">-</span>
+          <span style="monthend" id="month122end">Dec</span>
+        </p>        
+      </div>
+    </td>
+    <td class="data col3">
+      <div class="row1 col3" id="data13">
+        <p class="rectangle" id="month131">
+          <span style="monthstart" id="month131start">Jan</span>
+          <span id="month131spacer">-</span>
+          <span style="monthend" id="month131end">Jun</span>
+        </p>
+        <p class="rectangle" id="month132">
+          <span style="monthstart" id="month132start">Jul</span>
+          <span id="month132spacer">-</span>
+          <span style="monthend" id="month132end">Dec</span>
+        </p>        
+      </div>
+    </td>
+    <td class="data col4">
+      <div class="row1 col4" id="data14">
+        <p class="rectangle" id="month141">
+          <span style="monthstart" id="month141start">Jan</span>
+          <span id="month141spacer">-</span>
+          <span style="monthend" id="month141end">Jun</span>
+        </p>
+        <p class="rectangle" id="month142">
+          <span style="monthstart" id="month142start">Jul</span>
+          <span id="month142spacer">-</span>
+          <span style="monthend" id="month142end">Dec</span>
+        </p>        
+      </div>
+    </td>
+  </tr>
+  <tr id="row2" class="datarow row2">
+    <td class="spacer row2" id="headrow2td">
+      <div class="row2" id="rowcell1">
+        <span style="startrange" id="rowcell2start">1</span> 
+        <span id="rowcell2spacer">-</span>
+        <span style="startrange" id="rowcell2end">1</span>   
+      </div>        
+    </td>
+    <td class="data col1">
+      <div class="row2 col1" id="data21">
+        <p class="rectangle" id="month211">
+          <span style="monthstart" id="month211start">Jan</span>
+          <span id="month211spacer">-</span>
+          <span style="monthend" id="month211end">Jun</span>
+        </p>
+        <p class="rectangle" id="month212">
+          <span style="monthstart" id="month212start">Jul</span>
+          <span id="month212spacer">-</span>
+          <span style="monthend" id="month212end">Dec</span>
+        </p>        
+      </div>
+    </td>
+    <td class="data col2">
+      <div class="row2 col2" id="data22">
+        <p class="rectangle" id="month221">
+          <span style="monthstart" id="month221start">Jan</span>
+          <span id="month221spacer">-</span>
+          <span style="monthend" id="month221end">Jun</span>
+        </p>
+        <p class="rectangle" id="month222">
+          <span style="monthstart" id="month222start">Jul</span>
+          <span id="month222spacer">-</span>
+          <span style="monthend" id="month222end">Dec</span>
+        </p>        
+      </div>
+    </td>
+    <td class="data col3">
+      <div class="row2 col3" id="data23">
+        <p class="rectangle" id="month231">
+          <span style="monthstart" id="month231start">Jan</span>
+          <span id="month231spacer">-</span>
+          <span style="monthend" id="month231end">Jun</span>
+        </p>
+        <p class="rectangle" id="month232">
+          <span style="monthstart" id="month232start">Jul</span>
+          <span id="month232spacer">-</span>
+          <span style="monthend" id="month232end">Dec</span>
+        </p>        
+      </div>
+    </td>
+    <td class="data col4">
+      <div class="row2 col4" id="data24">
+        <p class="rectangle" id="month241">
+          <span style="monthstart" id="month241start">Jan</span>
+          <span id="month241spacer">-</span>
+          <span style="monthend" id="month241end">Jun</span>
+        </p>
+        <p class="rectangle" id="month242">
+          <span style="monthstart" id="month242start">Jul</span>
+          <span id="month242spacer">-</span>
+          <span style="monthend" id="month242end">Dec</span>
+        </p>        
+      </div>
+    </td>
+  </tr>
+  <tr id="row3" class="datarow row3">
+    <td class="spacer row3" id="headrow3td">
+      <div class="row3" id="rowcell3">
+        <span style="startrange" id="rowcell3start">1</span> 
+        <span id="rowcell3spacer">-</span>
+        <span style="startrange" id="rowcell3end">1</span>   
+      </div>        
+    </td>
+
+    <td class="data col1">
+      <div class="row3 col1" id="data31">
+        <p class="rectangle" id="month311">
+          <span style="monthstart" id="month311start">Jan</span>
+          <span id="month311spacer">-</span>
+          <span style="monthend" id="month311end">Jun</span>
+        </p>
+        <p class="rectangle" id="month312">
+          <span style="monthstart" id="month312start">Jul</span>
+          <span id="month312spacer">-</span>
+          <span style="monthend" id="month312end">Dec</span>
+        </p>        
+      </div>
+    </td>
+    <td class="data col2">
+      <div class="row3 col2" id="data32">
+        <p class="rectangle" id="month321">
+          <span style="monthstart" id="month321start">Jan</span>
+          <span id="month321spacer">-</span>
+          <span style="monthend" id="month321end">Jun</span>
+        </p>
+        <p class="rectangle" id="month322">
+          <span style="monthstart" id="month322start">Jul</span>
+          <span id="month322spacer">-</span>
+          <span style="monthend" id="month322end">Dec</span>
+        </p>
+      </div>
+    </td>
+    <td class="data col3">
+      <div class="row3 col3" id="data33">
+        <p class="rectangle" id="month331">
+          <span style="monthstart" id="month331start">Jan</span>
+          <span id="month331spacer">-</span>
+          <span style="monthend" id="month331end">Jun</span>
+        </p>
+        <p class="rectangle" id="month332">
+          <span style="monthstart" id="month332start">Jul</span>
+          <span id="month332spacer">-</span>
+          <span style="monthend" id="month332end">Dec</span>
+        </p>        
+      </div>
+    </td>
+    <td class="data col4">
+      <div class="row3 col4" id="data34">
+        <p class="rectangle" id="month341">
+          <span style="monthstart" id="month341start">Jan</span>
+          <span id="month341spacer">-</span>
+          <span style="monthend" id="month341end">Jun</span>
+        </p>
+        <p class="rectangle" id="month342">
+          <span style="monthstart" id="month342start">Jul</span>
+          <span id="month342spacer">-</span>
+          <span style="monthend" id="month342end">Dec</span>
+        </p>                
+      </div>
+    </td>
+  </tr>
+</table>
+
+<div id="success">
+  The birthday you picked is&nbsp;<span id="successday">1</span>&nbsp;<span id="successmonth">do</span>&nbsp;<span id="successyear">0000</span>.  Refresh to select another date. 
+</div>
+  
+</body>
+</html>
