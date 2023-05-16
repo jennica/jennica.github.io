@@ -311,9 +311,13 @@ function doUpdate(row, col, month) {
   $('div[id^="data"]').each(function() {
     if ($(this).is(':visible')) {
       count++;
+      divId = '#' + this.id;
     }
   });
-  if (count == 1) {
+
+
+
+  if (count == 1 && $(divId + ' p:visible').length == 1) {
     $('#alldates').hide();
     $('#success').show();
     $('#successyear').text(oldYearPartition[0]);
