@@ -1,0 +1,27 @@
+{
+  "ASV": {
+    "wiki": "https://en.wikipedia.org/wiki/American_Standard_Version",
+    "title": "American Standard Version",
+    "id": "001"
+  },
+  "BBE": {
+    "wiki": "https://en.wikipedia.org/wiki/Bible_in_Basic_English",
+    "title": "Bible in Basic English",
+    "id": "002"
+  },
+  "KJV": {
+    "wiki": "https://en.wikipedia.org/wiki/King_James_Version",
+    "title": "King James Version",
+    "id": "004"
+  },
+  "WEB": {
+    "wiki": "https://en.wikipedia.org/wiki/World_English_Bible",
+    "title": "World English Bible",
+    "id": "006"
+  },
+  "YLT": {
+    "wiki": "https://en.wikipedia.org/wiki/Young%27s_Literal_Translation",
+    "title": "Young's Literal Translation",
+    "id": "007"
+  }
+}

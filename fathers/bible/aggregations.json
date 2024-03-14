@@ -1,0 +1,1410 @@
+{
+  "ANF-01": [
+    [
+      "Clement of Rome",
+      3,
+      5,
+      {
+        "1 Corinthians": 8,
+        "1 Peter": 5,
+        "1 Thessalonians": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 2,
+        "2 Peter": 3,
+        "Acts": 1,
+        "Colossians": 1,
+        "Ephesians": 3,
+        "Hebrews": 15,
+        "James": 6,
+        "Luke": 3,
+        "Mark": 2,
+        "Matthew": 4,
+        "Philippians": 1,
+        "Revelation": 1,
+        "Romans": 6,
+        "Titus": 3
+      }
+    ],
+    [
+      "Mathetes",
+      6,
+      8,
+      {
+        "1 Corinthians": 1,
+        "1 Peter": 2,
+        "1 Timothy": 1,
+        "2 Corinthians": 4,
+        "Acts": 1,
+        "Galatians": 2,
+        "John": 1,
+        "Matthew": 2,
+        "Philippians": 1,
+        "Revelation": 1,
+        "Romans": 1
+      }
+    ],
+    [
+      "Polycarp",
+      9,
+      13,
+      {
+        "1 Corinthians": 5,
+        "1 John": 2,
+        "1 Peter": 15,
+        "1 Thessalonians": 2,
+        "1 Timothy": 4,
+        "2 Corinthians": 3,
+        "2 Peter": 1,
+        "2 Thessalonians": 1,
+        "2 Timothy": 1,
+        "Acts": 4,
+        "Ephesians": 4,
+        "Galatians": 4,
+        "Jude": 1,
+        "Luke": 4,
+        "Mark": 2,
+        "Matthew": 12,
+        "Philippians": 5,
+        "Romans": 4,
+        "Titus": 1
+      }
+    ],
+    [
+      "Ignatius",
+      14,
+      38,
+      {
+        "1 Corinthians": 52,
+        "1 John": 2,
+        "1 Peter": 11,
+        "1 Thessalonians": 2,
+        "1 Timothy": 19,
+        "2 Corinthians": 7,
+        "2 John": 1,
+        "2 Peter": 1,
+        "2 Thessalonians": 2,
+        "2 Timothy": 15,
+        "Acts": 9,
+        "Colossians": 9,
+        "Ephesians": 25,
+        "Galatians": 12,
+        "Hebrews": 4,
+        "James": 5,
+        "John": 55,
+        "Luke": 17,
+        "Mark": 3,
+        "Matthew": 42,
+        "Philemon": 2,
+        "Philippians": 12,
+        "Revelation": 1,
+        "Romans": 13,
+        "Titus": 3
+      }
+    ],
+    [
+      "Barnabas",
+      39,
+      43,
+      {
+        "1 Corinthians": 3,
+        "1 Timothy": 1,
+        "2 Corinthians": 2,
+        "2 Peter": 1,
+        "Acts": 1,
+        "Colossians": 1,
+        "Ephesians": 2,
+        "Hebrews": 2,
+        "James": 1,
+        "John": 3,
+        "Luke": 2,
+        "Mark": 1,
+        "Matthew": 7,
+        "Romans": 3
+      }
+    ],
+    [
+      "Justin Martyr",
+      44,
+      54,
+      {
+        "1 Corinthians": 3,
+        "1 Peter": 1,
+        "2 Peter": 2,
+        "2 Thessalonians": 2,
+        "Acts": 3,
+        "Galatians": 2,
+        "Hebrews": 1,
+        "James": 1,
+        "John": 5,
+        "Luke": 20,
+        "Mark": 3,
+        "Matthew": 47,
+        "Philippians": 1,
+        "Revelation": 1,
+        "Romans": 4
+      }
+    ],
+    [
+      "Irenaeus",
+      55,
+      65,
+      {
+        "1 Corinthians": 103,
+        "1 John": 6,
+        "1 Peter": 16,
+        "1 Thessalonians": 3,
+        "1 Timothy": 12,
+        "2 Corinthians": 21,
+        "2 John": 2,
+        "2 Peter": 3,
+        "2 Thessalonians": 9,
+        "2 Timothy": 7,
+        "Acts": 50,
+        "Colossians": 19,
+        "Ephesians": 34,
+        "Galatians": 30,
+        "Hebrews": 6,
+        "John": 116,
+        "Jude": 2,
+        "Luke": 142,
+        "Mark": 18,
+        "Matthew": 254,
+        "Philippians": 12,
+        "Revelation": 36,
+        "Romans": 84,
+        "Titus": 2
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 175,
+        "1 John": 10,
+        "1 Peter": 50,
+        "1 Thessalonians": 8,
+        "1 Timothy": 38,
+        "2 Corinthians": 39,
+        "2 John": 3,
+        "2 Peter": 11,
+        "2 Thessalonians": 14,
+        "2 Timothy": 23,
+        "Acts": 69,
+        "Colossians": 30,
+        "Ephesians": 68,
+        "Galatians": 50,
+        "Hebrews": 28,
+        "James": 13,
+        "John": 180,
+        "Jude": 3,
+        "Luke": 188,
+        "Mark": 29,
+        "Matthew": 368,
+        "Philemon": 2,
+        "Philippians": 32,
+        "Revelation": 40,
+        "Romans": 115,
+        "Titus": 9
+      }
+    ]
+  ],
+  "ANF-02": [
+    [
+      "The Pastor of Hermas",
+      2,
+      34,
+      {
+        "1 Corinthians": 16,
+        "1 John": 6,
+        "1 Peter": 7,
+        "1 Thessalonians": 2,
+        "1 Timothy": 2,
+        "2 Corinthians": 5,
+        "2 Peter": 2,
+        "2 Thessalonians": 3,
+        "Acts": 6,
+        "Colossians": 2,
+        "Ephesians": 11,
+        "Galatians": 3,
+        "Hebrews": 15,
+        "John": 2,
+        "Luke": 14,
+        "Mark": 4,
+        "Matthew": 32,
+        "Philippians": 4,
+        "Revelation": 16,
+        "Romans": 9
+      }
+    ],
+    [
+      "Tatian",
+      35,
+      37,
+      {
+        "1 Corinthians": 4,
+        "1 Peter": 1,
+        "Ephesians": 1,
+        "John": 2,
+        "Matthew": 3,
+        "Romans": 3,
+        "Titus": 1
+      }
+    ],
+    [
+      "Theophilus of Antioch",
+      38,
+      43,
+      {
+        "1 Corinthians": 1,
+        "1 John": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 1,
+        "Acts": 2,
+        "Hebrews": 2,
+        "John": 2,
+        "Luke": 1,
+        "Matthew": 4,
+        "Revelation": 1,
+        "Romans": 4
+      }
+    ],
+    [
+      "Writings of Athenagoras",
+      44,
+      47,
+      {
+        "1 Corinthians": 3,
+        "1 Timothy": 3,
+        "Colossians": 1,
+        "Hebrews": 1,
+        "Luke": 2,
+        "Matthew": 7,
+        "Romans": 1,
+        "Titus": 1
+      }
+    ],
+    [
+      "Clement of Alexandria",
+      48,
+      87,
+      {
+        "1 Corinthians": 186,
+        "1 John": 14,
+        "1 Peter": 26,
+        "1 Thessalonians": 11,
+        "1 Timothy": 25,
+        "2 Corinthians": 48,
+        "2 Peter": 4,
+        "2 Thessalonians": 1,
+        "2 Timothy": 7,
+        "Acts": 21,
+        "Colossians": 29,
+        "Ephesians": 47,
+        "Galatians": 38,
+        "Hebrews": 32,
+        "John": 92,
+        "Jude": 6,
+        "Luke": 118,
+        "Mark": 26,
+        "Matthew": 267,
+        "Philippians": 16,
+        "Revelation": 6,
+        "Romans": 120,
+        "Titus": 7
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 210,
+        "1 John": 21,
+        "1 Peter": 34,
+        "1 Thessalonians": 13,
+        "1 Timothy": 31,
+        "2 Corinthians": 54,
+        "2 Peter": 6,
+        "2 Thessalonians": 4,
+        "2 Timothy": 7,
+        "Acts": 29,
+        "Colossians": 32,
+        "Ephesians": 59,
+        "Galatians": 41,
+        "Hebrews": 50,
+        "John": 98,
+        "Jude": 6,
+        "Luke": 135,
+        "Mark": 30,
+        "Matthew": 313,
+        "Philippians": 20,
+        "Revelation": 23,
+        "Romans": 137,
+        "Titus": 9
+      }
+    ]
+  ],
+  "ANF-03": [
+    [
+      "Tertullian",
+      4,
+      57,
+      {
+        "1 Corinthians": 279,
+        "1 John": 23,
+        "1 Peter": 20,
+        "1 Thessalonians": 29,
+        "1 Timothy": 40,
+        "2 Corinthians": 97,
+        "2 Peter": 5,
+        "2 Thessalonians": 15,
+        "2 Timothy": 23,
+        "Acts": 79,
+        "Colossians": 35,
+        "Ephesians": 88,
+        "Galatians": 103,
+        "Hebrews": 32,
+        "James": 1,
+        "John": 233,
+        "Luke": 474,
+        "Mark": 39,
+        "Matthew": 335,
+        "Philippians": 31,
+        "Revelation": 66,
+        "Romans": 144,
+        "Titus": 5
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 279,
+        "1 John": 23,
+        "1 Peter": 20,
+        "1 Thessalonians": 29,
+        "1 Timothy": 40,
+        "2 Corinthians": 97,
+        "2 Peter": 5,
+        "2 Thessalonians": 15,
+        "2 Timothy": 23,
+        "Acts": 79,
+        "Colossians": 35,
+        "Ephesians": 88,
+        "Galatians": 103,
+        "Hebrews": 32,
+        "James": 1,
+        "John": 233,
+        "Luke": 474,
+        "Mark": 39,
+        "Matthew": 335,
+        "Philippians": 31,
+        "Revelation": 66,
+        "Romans": 144,
+        "Titus": 5
+      }
+    ]
+  ],
+  "ANF-04": [
+    [
+      "Tertullian",
+      2,
+      31,
+      {
+        "1 Corinthians": 140,
+        "1 John": 19,
+        "1 Peter": 12,
+        "1 Thessalonians": 12,
+        "1 Timothy": 26,
+        "2 Corinthians": 28,
+        "2 John": 1,
+        "2 Peter": 5,
+        "2 Thessalonians": 5,
+        "2 Timothy": 7,
+        "3 John": 1,
+        "Acts": 32,
+        "Colossians": 11,
+        "Ephesians": 34,
+        "Galatians": 29,
+        "Hebrews": 27,
+        "John": 41,
+        "Jude": 3,
+        "Luke": 85,
+        "Mark": 34,
+        "Matthew": 153,
+        "Philippians": 20,
+        "Revelation": 16,
+        "Romans": 47,
+        "Titus": 5
+      }
+    ],
+    [
+      "Minucius Felix",
+      32,
+      39,
+      {
+        "1 Corinthians": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 1,
+        "Luke": 1,
+        "Mark": 1,
+        "Revelation": 2
+      }
+    ],
+    [
+      "Origen",
+      40,
+      64,
+      {
+        "1 Corinthians": 119,
+        "1 John": 15,
+        "1 Peter": 10,
+        "1 Thessalonians": 6,
+        "1 Timothy": 9,
+        "2 Corinthians": 45,
+        "2 Thessalonians": 8,
+        "2 Timothy": 16,
+        "Acts": 21,
+        "Colossians": 26,
+        "Ephesians": 22,
+        "Galatians": 20,
+        "Hebrews": 34,
+        "John": 109,
+        "Jude": 1,
+        "Luke": 40,
+        "Mark": 13,
+        "Matthew": 139,
+        "Philippians": 17,
+        "Revelation": 5,
+        "Romans": 104,
+        "Titus": 5
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 260,
+        "1 John": 34,
+        "1 Peter": 22,
+        "1 Thessalonians": 18,
+        "1 Timothy": 36,
+        "2 Corinthians": 74,
+        "2 John": 1,
+        "2 Peter": 5,
+        "2 Thessalonians": 13,
+        "2 Timothy": 23,
+        "3 John": 1,
+        "Acts": 53,
+        "Colossians": 37,
+        "Ephesians": 56,
+        "Galatians": 49,
+        "Hebrews": 61,
+        "John": 150,
+        "Jude": 4,
+        "Luke": 126,
+        "Mark": 48,
+        "Matthew": 292,
+        "Philippians": 37,
+        "Revelation": 23,
+        "Romans": 151,
+        "Titus": 10
+      }
+    ]
+  ],
+  "ANF-05": [
+    [
+      "Hippolytus",
+      3,
+      21,
+      {
+        "1 Corinthians": 16,
+        "1 John": 3,
+        "1 Peter": 2,
+        "1 Thessalonians": 1,
+        "1 Timothy": 8,
+        "2 Corinthians": 6,
+        "2 Peter": 7,
+        "2 Thessalonians": 2,
+        "2 Timothy": 3,
+        "Acts": 16,
+        "Colossians": 8,
+        "Ephesians": 13,
+        "Galatians": 13,
+        "Hebrews": 4,
+        "John": 59,
+        "Luke": 35,
+        "Mark": 10,
+        "Matthew": 74,
+        "Philippians": 7,
+        "Revelation": 16,
+        "Romans": 14,
+        "Titus": 1
+      }
+    ],
+    [
+      "Cyprian",
+      22,
+      131,
+      {
+        "1 Corinthians": 94,
+        "1 John": 35,
+        "1 Peter": 19,
+        "1 Thessalonians": 6,
+        "1 Timothy": 21,
+        "2 Corinthians": 27,
+        "2 John": 1,
+        "2 Peter": 2,
+        "2 Thessalonians": 8,
+        "2 Timothy": 18,
+        "Acts": 44,
+        "Colossians": 15,
+        "Ephesians": 30,
+        "Galatians": 34,
+        "Hebrews": 8,
+        "John": 134,
+        "Jude": 2,
+        "Luke": 95,
+        "Mark": 26,
+        "Matthew": 203,
+        "Philippians": 18,
+        "Revelation": 48,
+        "Romans": 59,
+        "Titus": 7
+      }
+    ],
+    [
+      "Caius",
+      132,
+      135,
+      {
+        "1 John": 1
+      }
+    ],
+    [
+      "Novatian",
+      136,
+      140,
+      {
+        "1 Corinthians": 10,
+        "1 John": 1,
+        "1 Peter": 1,
+        "1 Timothy": 11,
+        "2 Corinthians": 3,
+        "2 Peter": 1,
+        "Acts": 2,
+        "Colossians": 6,
+        "Ephesians": 2,
+        "Galatians": 6,
+        "Hebrews": 4,
+        "John": 79,
+        "Luke": 3,
+        "Mark": 2,
+        "Matthew": 13,
+        "Philippians": 2,
+        "Revelation": 4,
+        "Romans": 9,
+        "Titus": 1
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 120,
+        "1 John": 40,
+        "1 Peter": 22,
+        "1 Thessalonians": 7,
+        "1 Timothy": 40,
+        "2 Corinthians": 36,
+        "2 John": 1,
+        "2 Peter": 10,
+        "2 Thessalonians": 10,
+        "2 Timothy": 21,
+        "Acts": 62,
+        "Colossians": 29,
+        "Ephesians": 45,
+        "Galatians": 53,
+        "Hebrews": 16,
+        "John": 272,
+        "Jude": 2,
+        "Luke": 133,
+        "Mark": 38,
+        "Matthew": 290,
+        "Philippians": 27,
+        "Revelation": 68,
+        "Romans": 82,
+        "Titus": 9
+      }
+    ]
+  ],
+  "ANF-06": [
+    [
+      "Gregory Thaumaturgus",
+      2,
+      30,
+      {
+        "1 Corinthians": 16,
+        "1 John": 1,
+        "1 Thessalonians": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 8,
+        "Acts": 3,
+        "Colossians": 1,
+        "Ephesians": 1,
+        "Galatians": 1,
+        "Hebrews": 3,
+        "John": 29,
+        "Luke": 21,
+        "Mark": 3,
+        "Matthew": 17,
+        "Revelation": 1,
+        "Romans": 11
+      }
+    ],
+    [
+      "Dionysius",
+      31,
+      44,
+      {
+        "1 Corinthians": 6,
+        "1 John": 3,
+        "1 Peter": 1,
+        "1 Thessalonians": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 2,
+        "Acts": 4,
+        "Ephesians": 1,
+        "Hebrews": 1,
+        "John": 13,
+        "Luke": 4,
+        "Mark": 2,
+        "Matthew": 7,
+        "Revelation": 6,
+        "Romans": 2,
+        "Titus": 1
+      }
+    ],
+    [
+      "Julius Africanus",
+      45,
+      53,
+      {
+        "1 Corinthians": 1,
+        "Hebrews": 1,
+        "Luke": 1,
+        "Matthew": 1
+      }
+    ],
+    [
+      "Anatolius and Minor Writers",
+      54,
+      58,
+      {}
+    ],
+    [
+      "Alexander of Cappadocia",
+      59,
+      62,
+      {
+        "Acts": 1
+      }
+    ],
+    [
+      "Theognostus of Alexandria",
+      63,
+      65,
+      {
+        "Hebrews": 1,
+        "Matthew": 1
+      }
+    ],
+    [
+      "Pierius of Alexandria",
+      66,
+      69,
+      {
+        "1 Corinthians": 1,
+        "Matthew": 1
+      }
+    ],
+    [
+      "Theonas of Alexandria",
+      70,
+      72,
+      {
+        "1 Corinthians": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 1,
+        "Colossians": 1,
+        "Ephesians": 1,
+        "Mark": 1,
+        "Matthew": 3,
+        "Philippians": 1,
+        "Romans": 1
+      }
+    ],
+    [
+      "Phileas",
+      73,
+      76,
+      {
+        "1 John": 1,
+        "1 Timothy": 1,
+        "Philippians": 1
+      }
+    ],
+    [
+      "Pamphilus",
+      77,
+      79,
+      {}
+    ],
+    [
+      "Malchion",
+      80,
+      86,
+      {
+        "1 Timothy": 1
+      }
+    ],
+    [
+      "Archelaus",
+      87,
+      92,
+      {
+        "1 Corinthians": 24,
+        "1 John": 1,
+        "1 Thessalonians": 1,
+        "1 Timothy": 4,
+        "2 Corinthians": 19,
+        "2 Peter": 1,
+        "2 Timothy": 4,
+        "Acts": 5,
+        "Colossians": 3,
+        "Ephesians": 5,
+        "Galatians": 10,
+        "Hebrews": 4,
+        "John": 27,
+        "Luke": 19,
+        "Mark": 7,
+        "Matthew": 62,
+        "Philippians": 6,
+        "Romans": 15
+      }
+    ],
+    [
+      "Alexander",
+      93,
+      95,
+      {}
+    ],
+    [
+      "Peter, Bishop of Alexandria",
+      96,
+      103,
+      {
+        "1 Corinthians": 3,
+        "1 John": 2,
+        "1 Timothy": 2,
+        "2 Corinthians": 2,
+        "Acts": 8,
+        "Colossians": 1,
+        "Ephesians": 3,
+        "Galatians": 1,
+        "Hebrews": 1,
+        "John": 8,
+        "Luke": 7,
+        "Matthew": 18,
+        "Philippians": 1,
+        "Romans": 4,
+        "Titus": 1
+      }
+    ],
+    [
+      "Alexander",
+      104,
+      107,
+      {
+        "1 Corinthians": 1,
+        "1 Timothy": 2,
+        "2 Corinthians": 2,
+        "2 Timothy": 2,
+        "Colossians": 1,
+        "Galatians": 1,
+        "Hebrews": 4,
+        "John": 15,
+        "Luke": 1,
+        "Matthew": 3,
+        "Romans": 1
+      }
+    ],
+    [
+      "Methodius",
+      108,
+      130,
+      {
+        "1 Corinthians": 41,
+        "1 John": 1,
+        "1 Peter": 4,
+        "1 Thessalonians": 4,
+        "1 Timothy": 6,
+        "2 Corinthians": 18,
+        "Acts": 2,
+        "Colossians": 2,
+        "Ephesians": 13,
+        "Galatians": 6,
+        "Hebrews": 11,
+        "John": 25,
+        "Luke": 27,
+        "Mark": 4,
+        "Matthew": 34,
+        "Philippians": 5,
+        "Revelation": 10,
+        "Romans": 25,
+        "Titus": 3
+      }
+    ],
+    [
+      "Arnobius",
+      131,
+      142,
+      {
+        "1 Corinthians": 1,
+        "1 Peter": 1,
+        "1 Timothy": 1,
+        "Acts": 1,
+        "Colossians": 1,
+        "John": 9,
+        "Luke": 1,
+        "Mark": 1,
+        "Matthew": 1,
+        "Romans": 1
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 95,
+        "1 John": 9,
+        "1 Peter": 6,
+        "1 Thessalonians": 7,
+        "1 Timothy": 20,
+        "2 Corinthians": 52,
+        "2 Peter": 1,
+        "2 Timothy": 6,
+        "Acts": 24,
+        "Colossians": 10,
+        "Ephesians": 24,
+        "Galatians": 19,
+        "Hebrews": 26,
+        "John": 126,
+        "Luke": 81,
+        "Mark": 18,
+        "Matthew": 148,
+        "Philippians": 14,
+        "Revelation": 17,
+        "Romans": 60,
+        "Titus": 5
+      }
+    ]
+  ],
+  "ANF-07": [
+    [
+      "Lactantius",
+      2,
+      20,
+      {
+        "1 Corinthians": 11,
+        "1 John": 4,
+        "1 Peter": 2,
+        "1 Thessalonians": 1,
+        "1 Timothy": 3,
+        "2 Corinthians": 3,
+        "2 Peter": 7,
+        "2 Thessalonians": 1,
+        "Acts": 12,
+        "Colossians": 6,
+        "Ephesians": 5,
+        "Galatians": 2,
+        "Hebrews": 10,
+        "John": 16,
+        "Luke": 7,
+        "Mark": 2,
+        "Matthew": 13,
+        "Philippians": 2,
+        "Revelation": 2,
+        "Romans": 11,
+        "Titus": 1
+      }
+    ],
+    [
+      "Venantius",
+      21,
+      23,
+      {
+        "Revelation": 1
+      }
+    ],
+    [
+      "Asterius Urbanus",
+      24,
+      27,
+      {}
+    ],
+    [
+      "Victorinus",
+      28,
+      30,
+      {
+        "1 Corinthians": 6,
+        "1 Peter": 1,
+        "1 Timothy": 1,
+        "2 Thessalonians": 5,
+        "Acts": 3,
+        "Colossians": 1,
+        "John": 6,
+        "Luke": 3,
+        "Mark": 4,
+        "Matthew": 11,
+        "Revelation": 7,
+        "Romans": 1
+      }
+    ],
+    [
+      "Dionysius",
+      31,
+      33,
+      {
+        "Colossians": 1,
+        "John": 3
+      }
+    ],
+    [
+      "Apostolic Teaching and Constitutions",
+      34,
+      51,
+      {
+        "1 Corinthians": 29,
+        "1 Peter": 19,
+        "1 Thessalonians": 3,
+        "1 Timothy": 18,
+        "2 Corinthians": 12,
+        "2 John": 1,
+        "2 Thessalonians": 3,
+        "2 Timothy": 10,
+        "Acts": 33,
+        "Colossians": 8,
+        "Ephesians": 13,
+        "Galatians": 6,
+        "Hebrews": 8,
+        "John": 50,
+        "Luke": 80,
+        "Mark": 18,
+        "Matthew": 184,
+        "Philemon": 2,
+        "Philippians": 2,
+        "Revelation": 4,
+        "Romans": 18,
+        "Titus": 2
+      }
+    ],
+    [
+      "Clement",
+      52,
+      55,
+      {
+        "1 Corinthians": 2,
+        "1 Peter": 2,
+        "1 Timothy": 2,
+        "2 Corinthians": 1,
+        "2 Peter": 2,
+        "Acts": 3,
+        "Ephesians": 4,
+        "Galatians": 1,
+        "Hebrews": 3,
+        "John": 1,
+        "Luke": 8,
+        "Mark": 1,
+        "Matthew": 12,
+        "Philippians": 1,
+        "Revelation": 1,
+        "Romans": 2
+      }
+    ],
+    [
+      "Nicene Council",
+      56,
+      60,
+      {}
+    ],
+    [
+      "Early Liturgies",
+      61,
+      66,
+      {
+        "1 Peter": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 1,
+        "Hebrews": 2,
+        "John": 2,
+        "Luke": 1,
+        "Philippians": 1,
+        "Revelation": 1
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 48,
+        "1 John": 4,
+        "1 Peter": 25,
+        "1 Thessalonians": 4,
+        "1 Timothy": 25,
+        "2 Corinthians": 17,
+        "2 John": 1,
+        "2 Peter": 9,
+        "2 Thessalonians": 9,
+        "2 Timothy": 10,
+        "Acts": 51,
+        "Colossians": 16,
+        "Ephesians": 22,
+        "Galatians": 9,
+        "Hebrews": 23,
+        "John": 78,
+        "Luke": 99,
+        "Mark": 25,
+        "Matthew": 220,
+        "Philemon": 2,
+        "Philippians": 6,
+        "Revelation": 16,
+        "Romans": 32,
+        "Titus": 3
+      }
+    ]
+  ],
+  "ANF-08": [
+    [
+      "The Twelve Patriarchs",
+      2,
+      17,
+      {
+        "1 Corinthians": 1,
+        "1 Peter": 1,
+        "1 Thessalonians": 1,
+        "2 Corinthians": 1,
+        "Acts": 1,
+        "Colossians": 1,
+        "Ephesians": 2,
+        "Hebrews": 2,
+        "John": 3,
+        "Jude": 1,
+        "Luke": 3,
+        "Mark": 1,
+        "Matthew": 7,
+        "Philippians": 1,
+        "Revelation": 4,
+        "Romans": 4
+      }
+    ],
+    [
+      "Theodotus",
+      18,
+      20,
+      {
+        "1 Corinthians": 3,
+        "2 Corinthians": 1,
+        "Galatians": 1,
+        "Luke": 4,
+        "Matthew": 9,
+        "Romans": 1
+      }
+    ],
+    [
+      "Clement of Rome",
+      21,
+      26,
+      {
+        "1 Corinthians": 13,
+        "1 Peter": 5,
+        "1 Timothy": 5,
+        "2 Corinthians": 5,
+        "2 Thessalonians": 1,
+        "2 Timothy": 4,
+        "Acts": 1,
+        "Colossians": 5,
+        "Ephesians": 3,
+        "Galatians": 4,
+        "Hebrews": 2,
+        "John": 6,
+        "Luke": 2,
+        "Mark": 1,
+        "Matthew": 18,
+        "Philippians": 7,
+        "Revelation": 2,
+        "Romans": 7,
+        "Titus": 1
+      }
+    ],
+    [
+      "Pseudo-Clementine Literature",
+      27,
+      64,
+      {
+        "1 Corinthians": 3,
+        "2 Corinthians": 1,
+        "Acts": 10,
+        "Ephesians": 1,
+        "Galatians": 2,
+        "John": 10,
+        "Luke": 51,
+        "Mark": 10,
+        "Matthew": 131,
+        "Revelation": 1,
+        "Romans": 3
+      }
+    ],
+    [
+      "Apocrypha of the New Testament",
+      65,
+      112,
+      {
+        "1 Corinthians": 15,
+        "1 Peter": 2,
+        "1 Thessalonians": 3,
+        "1 Timothy": 5,
+        "2 Corinthians": 7,
+        "2 Timothy": 6,
+        "Acts": 23,
+        "Colossians": 3,
+        "Ephesians": 5,
+        "Galatians": 3,
+        "Hebrews": 7,
+        "John": 39,
+        "Luke": 59,
+        "Mark": 16,
+        "Matthew": 108,
+        "Philippians": 1,
+        "Revelation": 15,
+        "Romans": 16,
+        "Titus": 1
+      }
+    ],
+    [
+      "The Decretals",
+      113,
+      136,
+      {
+        "1 Corinthians": 10,
+        "1 Peter": 1,
+        "1 Timothy": 4,
+        "2 Corinthians": 1,
+        "2 Thessalonians": 3,
+        "2 Timothy": 4,
+        "Acts": 3,
+        "Colossians": 1,
+        "Ephesians": 3,
+        "Galatians": 2,
+        "John": 5,
+        "Luke": 3,
+        "Mark": 3,
+        "Matthew": 16,
+        "Romans": 10
+      }
+    ],
+    [
+      "Memoirs of Edessa",
+      137,
+      141,
+      {
+        "Ephesians": 1,
+        "John": 1,
+        "Luke": 1,
+        "Matthew": 2
+      }
+    ],
+    [
+      "Ancient Syriac Documents",
+      142,
+      159,
+      {
+        "1 Corinthians": 2,
+        "2 Corinthians": 4,
+        "Acts": 7,
+        "Ephesians": 3,
+        "Galatians": 3,
+        "Hebrews": 1,
+        "John": 2,
+        "Jude": 1,
+        "Luke": 4,
+        "Mark": 2,
+        "Matthew": 8,
+        "Philippians": 1,
+        "Revelation": 1,
+        "Romans": 8
+      }
+    ],
+    [
+      "Remains of the Second and Third Centuries",
+      160,
+      178,
+      {
+        "1 Corinthians": 3,
+        "1 Peter": 1,
+        "1 Thessalonians": 1,
+        "1 Timothy": 1,
+        "2 Corinthians": 1,
+        "Acts": 7,
+        "Colossians": 1,
+        "Hebrews": 1,
+        "John": 4,
+        "Luke": 6,
+        "Mark": 1,
+        "Matthew": 8,
+        "Philippians": 2,
+        "Revelation": 3,
+        "Romans": 2
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 50,
+        "1 Peter": 10,
+        "1 Thessalonians": 5,
+        "1 Timothy": 15,
+        "2 Corinthians": 21,
+        "2 Thessalonians": 4,
+        "2 Timothy": 14,
+        "Acts": 52,
+        "Colossians": 11,
+        "Ephesians": 18,
+        "Galatians": 15,
+        "Hebrews": 13,
+        "John": 70,
+        "Jude": 2,
+        "Luke": 133,
+        "Mark": 34,
+        "Matthew": 307,
+        "Philippians": 12,
+        "Revelation": 26,
+        "Romans": 51,
+        "Titus": 2
+      }
+    ]
+  ],
+  "ANF-10": [
+    [
+      "Works Connected with the Gospels",
+      1,
+      8,
+      {
+        "Matthew": 2
+      }
+    ],
+    [
+      "Apocalypses and Romances",
+      9,
+      23,
+      {
+        "Romans": 1
+      }
+    ],
+    [
+      "The Epistles of Clement",
+      24,
+      32,
+      {
+        "1 Corinthians": 9,
+        "1 Peter": 5,
+        "1 Thessalonians": 1,
+        "1 Timothy": 2,
+        "2 Corinthians": 2,
+        "2 Peter": 3,
+        "Acts": 1,
+        "Ephesians": 3,
+        "Galatians": 1,
+        "Hebrews": 14,
+        "James": 6,
+        "Luke": 9,
+        "Mark": 2,
+        "Matthew": 15,
+        "Revelation": 1,
+        "Romans": 5,
+        "Titus": 3
+      }
+    ],
+    [
+      "Origen",
+      33,
+      51,
+      {
+        "1 Corinthians": 111,
+        "1 John": 10,
+        "1 Peter": 10,
+        "1 Thessalonians": 6,
+        "1 Timothy": 15,
+        "2 Corinthians": 35,
+        "2 Thessalonians": 8,
+        "2 Timothy": 4,
+        "3 John": 1,
+        "Acts": 19,
+        "Colossians": 11,
+        "Ephesians": 16,
+        "Galatians": 21,
+        "Hebrews": 21,
+        "John": 146,
+        "Jude": 4,
+        "Luke": 120,
+        "Mark": 48,
+        "Matthew": 455,
+        "Philippians": 14,
+        "Revelation": 2,
+        "Romans": 65,
+        "Titus": 3
+      }
+    ],
+    [
+      "TOTAL",
+      -1,
+      -1,
+      {
+        "1 Corinthians": 120,
+        "1 John": 10,
+        "1 Peter": 15,
+        "1 Thessalonians": 7,
+        "1 Timothy": 17,
+        "2 Corinthians": 37,
+        "2 Peter": 3,
+        "2 Thessalonians": 8,
+        "2 Timothy": 4,
+        "3 John": 1,
+        "Acts": 20,
+        "Colossians": 11,
+        "Ephesians": 19,
+        "Galatians": 22,
+        "Hebrews": 35,
+        "James": 6,
+        "John": 146,
+        "Jude": 4,
+        "Luke": 129,
+        "Mark": 50,
+        "Matthew": 472,
+        "Philippians": 14,
+        "Revelation": 3,
+        "Romans": 71,
+        "Titus": 6
+      }
+    ]
+  ]
+}

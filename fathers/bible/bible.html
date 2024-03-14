@@ -1,0 +1,438 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Writings Cross-Reference - Bible Display</title>
+    <script type="text/javascript" src="jquery-3.7.0.min.js"></script>
+    <script src="rainbowvis.js"></script>
+
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            max-width: 800px; /* Maximum width of the content area */
+            margin: auto; /* Center the content area */
+        }
+
+        .metadata {
+          font-family: Arial, Verdana, sans-serif;          
+        }
+
+        .book-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2em; /* Larger font size for the book title */
+        }
+
+        .chapter-title {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em; /* Slightly larger font size for chapter titles */
+            color: #444;
+        }
+
+        .verse {
+            margin-bottom: 10px; /* Space between verses */
+        }
+
+        .verse-number {
+            font-size: 0.8em; /* Smaller font size for verse numbers */
+            vertical-align: super; /* Superscript styling for verse numbers */
+            margin-right: 5px; /* Space between verse number and verse text */
+            color: #777; /* Lighter color for verse numbers */
+        }
+
+        select {
+            font-size: 16px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #checkbox-toggle {
+            display: inline-block;
+            max-width: 100%;
+
+            font-size: 16px;
+            padding: 4px 4px;
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: #d9d9d9;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #clear_all, #select_all {
+            display: inline-block;
+            max-width: 100%;
+
+            font-size: 16px;
+            padding: 4px 4px;
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        #goButton {
+            font-size: 16px;
+            padding: 8px 16px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #goButton:hover {
+            background-color: #0056b3;
+        }
+
+        #checkboxes {
+          font-family: Arial, Verdana, sans-serif;          
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px; /* Space between checkboxes */
+            padding: 10px; /* Padding around the grid */
+        }
+        #dropdown {
+            font-family: Arial, Verdana, sans-serif;          
+            position: absolute; /* Positioning relative to the click */
+            border: 1px solid black; /* Black border */
+            background-color: white; /* Background color */
+            padding: 10px; /* Padding inside the div */
+            z-index: 1000; /* Ensure it appears above other content */
+            display: none; /* Initially hidden */
+            max-width: 200px; /* Maximum width */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Optional: Adds a shadow for better visibility */
+        }
+
+
+        .checkbox-item {
+            display: flex;
+            align-items: center; /* Align checkbox and label */
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 5px; /* Space between checkbox and label */
+        }
+
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+// Book we're displaying
+var book = 'John';
+// Translation we're displaying
+var translation = 'ASV';
+// Valid translations
+const valid_translations = ["ASV", "BBE", "KJV", "WEB", "YLT"];
+const valid_authors = ['MAT', 'POL', 'IGN', 'BAR', 'JUS', 'IRE', 'THE', 'TAT', 'THO', 'WRI', 'CLM', 'TET', 'MIN', 'HIP', 'CYP', 'CAI', 'NOV', 'GRE', 'JUL', 'ANA', 'ALE', 'THG', 'PIE', 'THN', 'PHI', 'PAM', 'MAL', 'ARC', 'PET', 'ALA', 'MET', 'ARN', 'LAC', 'VEN', 'AST', 'VIC', 'DIN', 'APO', 'CLN', 'NIC', 'EAR', 'THT', 'THD', 'CLT', 'PSE', 'APC', 'THC', 'MEM', 'ANC', 'REM', 'WOR', 'APA', 'THP', 'ORG'];
+
+// Valid books
+const valid_books = [
+      "Matthew",
+      "Mark",
+      "Luke",
+      "John",
+      "Acts",
+      "Romans",
+      "1 Corinthians",
+      "2 Corinthians",
+      "Galatians",
+      "Ephesians",
+      "Philippians",
+      "Colossians",
+      "1 Thessalonians",
+      "2 Thessalonians",
+      "1 Timothy",
+      "2 Timothy",
+      "Titus",
+      "Philemon",
+      "Hebrews",
+      "James",
+      "1 Peter",
+      "2 Peter",
+      "1 John",
+      "2 John",
+      "3 John",
+      "Jude",
+      "Revelation"
+    ];
+var bible;
+var versions;
+var authors;
+var author_ids = [];
+
+function renderBook() {
+  // Get book id. 
+  const book_id = bible['id_map'][book];
+  // Now we have chapters. 
+  const chapters = bible['text'][book_id];
+  // Keep track of span counts
+  var max_verse_count = 0;
+
+  $.each(chapters, function(chapter_number) {
+    var chapter_title = $('<div>', {
+      text: 'Chapter ' + (chapter_number+1),
+      class: 'chapter-title'
+    });
+    $('#contents').append(chapter_title);
+
+    $.each(chapters[chapter_number], function(verse_number) {
+      const verse = chapters[chapter_number][verse_number];
+      const verse_id = book_id + "-" + (chapter_number+1) + "-" + (verse_number+1);
+      if (verse_id in authors['verses']) {
+        var verse_count = 0;
+        const verse_references = authors['verses'][verse_id];
+        $.each(author_ids, function(index, author_id) {
+          if (author_id in verse_references) {
+            verse_count += verse_references[author_id].length;
+          }
+        });
+        max_verse_count = Math.max(max_verse_count, verse_count);
+      }
+
+      var html = '<p class="verse">';
+      html += '<span class="verse-number">' + (verse_number+1) + '</span>';
+
+      html += '<span id="' + verse_id + '">' + verse + '</span>';
+
+      html += "</p>";
+      $('#contents').append(html);
+
+    });
+  });
+
+  var rainbow = new Rainbow(0, Math.max(1, max_verse_count));
+  rainbow.setSpectrum('#c2e5fc', '#0c9af7');
+  $.each(chapters, function(chapter_number) {
+    $.each(chapters[chapter_number], function(verse_number) {
+      const verse_id = book_id + "-" + (chapter_number+1) + "-" + (verse_number+1);
+      if (verse_id in authors['verses']) {
+        var verse_count = 0;
+        const verse_references = authors['verses'][verse_id];
+        $.each(author_ids, function(index, author_id) {
+          if (author_id in verse_references) {
+            verse_count += verse_references[author_id].length;
+          }
+        });
+        if (verse_count > 0) {
+          //$('#' + verse_id).css('font-weight', 'bolder');
+          $('#' + verse_id).css('background-color', '#' + rainbow.colourAt(verse_count));
+
+          $('#' + verse_id).click(function() {
+            var x = event.pageX; // Get the horizontal coordinate
+            var y = event.pageY; // Get the vertical coordinate
+            var html = '';
+            $.each(author_ids, function(index, author_id) {
+              if (author_id in verse_references) {
+                html += '<p>'
+                html += '<b>' + authors['id_to_author'][author_id] + ':</b> ';
+                for (var i = 0; i < verse_references[author_id].length; ++i) {
+                  const link = verse_references[author_id][i];
+                  html += '<a href="../' + link + '">';
+                  html += (i+1) + '</a> ';
+                }
+                html += '</p>';
+              }
+            });
+
+            $('#dropdown').html(html);
+
+            $('#dropdown').css({
+                'top': y + 'px', // Set top position
+                'left': x + 'px', // Set left position
+                'display': 'block' // Make the div visible
+            });
+          });
+        }
+      }            
+    });
+  });
+
+
+}
+
+function renderTranslations() {
+  // Populate dropdown.
+  $.each(versions, function(version, info) {
+    var option = $('<option>', {
+        value: version,
+        text: info['title'],
+        'data-link': version // Use data-link attribute to store associated link
+    });
+    if (version == translation) {
+      option.attr('selected', 'selected');
+      // Populate translation info. 
+      var html = '<a href="' + info['wiki'] + '">' + translation + '</a>';
+      $('#version_name').html(html);
+    }
+    $('#translationSelect').append(option);
+  });
+
+}
+
+$(document).ready(function() {
+  var url_params = new URLSearchParams(window.location.search);
+
+  // Get book or default to John
+  book = valid_books.includes(url_params.get('book')) ? url_params.get('book') : 'John';
+  // Get translation or default to ASV
+  translation = valid_translations.includes(url_params.get('translation')) ? url_params.get('translation') : 'ASV';
+
+  var candidate_ids = url_params.get('authors') ? url_params.get('authors').split(',') : valid_authors;
+  var valid_candidates = candidate_ids.filter(function(s) {
+      return valid_authors.includes(s);
+  });
+  author_ids = valid_candidates;
+  if (!author_ids || author_ids.length==0) {
+    author_ids = valid_authors;
+  }
+  author_ids.sort(function(a, b) {
+    return valid_authors.indexOf(a) - valid_authors.indexOf(b);    
+  });
+
+  $('#book_name').html(book);
+
+  // Render book dropdown
+  $.each(valid_books, function(index) {
+    const b = valid_books[index];
+    var option = $('<option>', {
+        value: b,
+        text: b,
+        'data-link': b // Use data-link attribute to store associated link
+    });
+    if (book == b) {
+      option.attr('selected', 'selected');
+    }
+    $('#bookSelect').append(option);
+  });
+
+  // Load the authors
+  $.getJSON('authors.json', function(data) {
+    authors = data;
+    $.each(valid_authors, function(i, author_id) {
+        var $checkbox = $('<input>', {
+            type: 'checkbox',
+            id: author_id,
+            class: 'checkbox'
+        });
+        var $label = $('<label>', {
+            for: author_id,
+            text: authors['id_to_author'][author_id],
+        });
+        var $container = $('<div>', {
+            class: 'checkbox-item'
+        }).append($checkbox).append($label);
+        
+        if ($.inArray(author_id, author_ids) !== -1) {
+          $checkbox.prop('checked', true);          
+        }
+
+
+        $('#checkboxes').append($container);
+    });
+
+    if (bible) renderBook();
+    if (versions) renderTranslations();
+  });  
+
+  // Load the translations
+  $.getJSON('versions.json', function(data) {
+    versions = data;
+    if (authors) renderTranslations();
+  });
+
+  // Load the Bible
+  $.getJSON(translation + '.json', function(data) {
+    bible = data;
+    if (authors) renderBook();
+  });
+
+
+  $('#goButton').click(function() {
+      // Get the selected option value and link
+      var selected_translation = $('#translationSelect option:selected').data('link');
+      var selected_book = $('#bookSelect option:selected').data('link');
+      var selected_link = '?translation=' + selected_translation + '&book=' + selected_book;
+
+      // Initialize an empty string to store the concatenated IDs
+      var selected_authors = "";
+      begin = true;
+      // Select all checked checkboxes and iterate over them
+      $('input[type="checkbox"]:checked').each(function() {
+          // Concatenate the ID of each checked checkbox
+        if (!begin) {
+          selected_authors += ',';
+        }
+        begin = false;
+        selected_authors += $(this).attr('id');
+      });
+      selected_link += '&authors=' + selected_authors;
+
+      window.location.href = selected_link;
+  });
+
+  $('#checkbox-toggle').click(function() {
+    if ($('#checkboxes').is(':hidden')) {
+      $('#checkboxes').css('display', 'grid');
+      $('#checkbox-toggle').text('Hide early church writing works filter')
+    } else {
+      $('#checkboxes').css('display', 'none');
+      $('#checkbox-toggle').text('Show early church writing works filter')
+    }
+  });
+
+  $('#clear_all').click(function() {
+    $('input[type="checkbox"]').prop('checked', false);
+  });
+
+  $('#select_all').click(function() {
+    $('input[type="checkbox"]').prop('checked', true);
+  });
+
+});
+
+</script>
+
+<div class="metadata">
+Book: <select id="bookSelect">
+</select>
+&nbsp;&nbsp;
+Translation: <select id="translationSelect">
+</select> 
+
+<div id="dropdown"></div><br/>
+<div id="checkbox-toggle">Show author selection</div>
+<button id="goButton">Go</button>
+</div>
+
+<div id="checkboxes">
+  <div id="select_all">Select All</div>
+  <div id="clear_all">Clear All</div>
+
+</div>
+
+
+<div class="bible-content">
+    <div class="book-title"><span id="book_name"></span> (<span id="version_name"></span>)</div>
+    <div id="contents">
+    </div>
+</div>
+
+</body>
+</html>
