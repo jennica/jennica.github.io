@@ -336,7 +336,8 @@ $(document).ready(function() {
             text: authors['id_to_author'][author_id],
         });
         var $container = $('<div>', {
-            class: 'checkbox-item'
+            class: 'checkbox-item',
+            id: author_id + "_div"
         }).append($checkbox).append($label);
         
         if ($.inArray(author_id, author_ids) !== -1) {
@@ -346,6 +347,17 @@ $(document).ready(function() {
 
         $('#checkboxes').append($container);
     });
+
+    var begin = true;
+    var author_text = '';
+    $.each(author_ids, function(i, author_id) {
+      if (!begin) {
+        author_text += ', ';
+      }
+      begin = false;
+      author_text += authors['id_to_author'][author_id];
+    });
+    $('#write_authors').text(author_text);
 
     if (bible) renderBook();
     if (versions) renderTranslations();
@@ -410,6 +422,7 @@ $(document).ready(function() {
 </script>
 
 <div class="metadata">
+<p><a href="index.html">Go back to home</a></p>
 Book: <select id="bookSelect">
 </select>
 &nbsp;&nbsp;
@@ -430,6 +443,7 @@ Translation: <select id="translationSelect">
 
 <div class="bible-content">
     <div class="book-title"><span id="book_name"></span> (<span id="version_name"></span>)</div>
+    <p style="font-size: x-small;">Referencing early church works <span id="write_authors"></span></p>
     <div id="contents">
     </div>
 </div>
