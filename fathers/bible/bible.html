@@ -33,6 +33,55 @@
             color: #444;
         }
 
+        .popup {
+            font-family: Arial, Verdana, sans-serif;          
+            font-size: smaller;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 999; /* Ensure the popup appears above other content */
+            pointer-events: none; /* Allow clicks to pass through the popup */
+            display: none;
+        }
+
+        .chapter-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            border: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            font-size: smaller;
+        }
+
+        .chapter-box-header {
+            height: 25px;
+            background-color: #fff;
+            margin: 5px;
+            padding: 10px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chapter-box {
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
         .verse {
             margin-bottom: 10px; /* Space between verses */
         }
@@ -106,6 +155,7 @@
             gap: 10px; /* Space between checkboxes */
             padding: 10px; /* Padding around the grid */
         }
+
         #dropdown {
             font-family: Arial, Verdana, sans-serif;          
             position: absolute; /* Positioning relative to the click */
@@ -185,10 +235,46 @@ function renderBook() {
   // Keep track of span counts
   var max_verse_count = 0;
 
+  const num_chapters = chapters.length;
+  if (num_chapters > 1) {
+
+    $('#book-chapters').append('<div class="chapter-box-header">Jump to chapter:</div> ');
+    // Generate boxes dynamically
+    for (var i = 1; i <= num_chapters; i++) {
+        const div_id =  'chapter_' + i + '_div';
+        var box = $('<div>', {
+            id: div_id,
+            class: 'chapter-box',
+            text: i
+        });
+        $('#book-chapters').append(box);
+        $('#' + div_id).click(function() {
+            // Get the corresponding anchor name/id
+            var anchorName = 'chapter_' + $(this).text();
+
+            // Scroll to the anchor
+            $('html, body').animate({
+                scrollTop: $('#' + anchorName).offset().top
+            }, 700); // Adjust the duration as needed          
+        });
+
+    }
+  }
+
+  // Update popup position on mousemove
+  $(document).on('mousemove', function(e) {
+      $('#chapter-popup').css({
+          top: e.pageY + 10,
+          left: e.pageX + 10
+      });
+  });
+
+
   $.each(chapters, function(chapter_number) {
     var chapter_title = $('<div>', {
       text: 'Chapter ' + (chapter_number+1),
-      class: 'chapter-title'
+      class: 'chapter-title',
+      id: 'chapter_' + (chapter_number+1)
     });
     $('#contents').append(chapter_title);
 
@@ -217,6 +303,9 @@ function renderBook() {
     });
   });
 
+  var chapter_references = Array.from({ length: num_chapters }, () => 0);
+  var max_chapter_reference_count = 0;
+
   var rainbow = new Rainbow(0, Math.max(1, max_verse_count));
   rainbow.setSpectrum('#c2e5fc', '#0c9af7');
   $.each(chapters, function(chapter_number) {
@@ -230,6 +319,7 @@ function renderBook() {
             verse_count += verse_references[author_id].length;
           }
         });
+        chapter_references[chapter_number] += verse_count;
         if (verse_count > 0) {
           //$('#' + verse_id).css('font-weight', 'bolder');
           $('#' + verse_id).css('background-color', '#' + rainbow.colourAt(verse_count));
@@ -260,10 +350,44 @@ function renderBook() {
             });
           });
         }
-      }            
+      }  
+      max_chapter_reference_count = Math.max(max_chapter_reference_count, chapter_references[chapter_number]);          
     });
   });
 
+  // finally, log number of references per chapter and color them
+  var min_chapter_reference_count = null;
+  $.each(chapter_references, function(i) {
+    if (min_chapter_reference_count == null) {
+      min_chapter_reference_count = chapter_references[i];
+    } else {
+      min_chapter_reference_count = Math.min(chapter_references[i], min_chapter_reference_count);
+    }
+  });
+  if (min_chapter_reference_count == null) {
+    min_chapter_reference_count = 0;
+  }
+
+  const upper = Math.max(1, max_chapter_reference_count - min_chapter_reference_count);
+  rainbow = new Rainbow(0, upper);
+  rainbow.setSpectrum('#c2e5fc', '#0c9af7');
+  $.each(chapters, function(chapter_number) {
+    const div_id =  'chapter_' + (chapter_number+1) + '_div';
+    const ref_index = parseInt($('#' + div_id).text()) - 1;
+    const references = chapter_references[ref_index];
+      if (references > 0) {
+      $('#' + div_id).css('background-color', '#' + rainbow.colourAt(references - min_chapter_reference_count));      
+    }
+      
+
+    $('#' + div_id).hover(function() {
+      $('#chapter-popup').text('References: ' + references);
+      $('#chapter-popup').show();
+    }, function() {
+      // Remove popup on mouse leave
+      $('#chapter-popup').hide();
+    });
+  });
 
 }
 
@@ -442,11 +566,13 @@ Translation: <select id="translationSelect">
 
 
 <div class="bible-content">
+    <div id="book-chapters" class="chapter-container"></div>
     <div class="book-title"><span id="book_name"></span> (<span id="version_name"></span>)</div>
     <p style="font-size: x-small;">Referencing early church works <span id="write_authors"></span></p>
     <div id="contents">
     </div>
 </div>
+<div id="chapter-popup" class="popup"></div>
 
 </body>
 </html>
