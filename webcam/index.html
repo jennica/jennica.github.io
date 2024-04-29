@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experimental Recording UX</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .box {
+            padding: 10px;
+            width: 50%;
+        }
+
+        #webcam-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #instructions-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #instructions {
+            padding: 20px;
+            font-size: 16px;
+            border: 2px solid black;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .recording-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: none; /* Hidden by default */
+            animation: flash 1s infinite;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }    
+
+        .upload-queue {
+            position: fixed;
+            bottom: 10px;
+            left: calc(100vw - 210px);
+            width: 200px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .queue-header {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .queue-content {
+            display: none; /* Initially hidden */
+            padding: 5px;
+        }
+
+        .queue-item {
+            margin-bottom: 5px;
+            padding: 5px;
+            background-color: #e9e9e9;
+            border-radius: 3px;
+        }
+
+        .progress {
+            background-color: #4CAF50;
+            height: 10px;
+            border-radius: 3px;
+        }
+
+        .cancel-button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 3px 6px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+<body>
+    <script type="text/javascript">
+        tasks = [];
+        upload_queue = [];
+        currentTaskIndex = 0;
+
+        let video;
+        let mediaRecorder;
+        let recordedBlobs;
+
+        function loadTask(index) {
+            if (index < tasks.length) {
+                let task = tasks[index];
+                $('#instructions-container').find('h2').text(`Instructions for ${task.round}`);
+                $('#instructions').text(task.instructions.join(' '));
+            } else {
+                $('#instructions-container').find('h2').text("No more tasks.");
+                $('#next').addClass('disabled').prop('disabled', true);
+            }
+        }
+
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Usage
+        async function sleep1s() {
+          console.log("Before sleep");
+          await sleep(1000);
+          console.log("After 2 seconds");
+        }
+
+        // Mock upload function
+        async function upload(url, name) {
+            const itemId = Math.random().toString(36).substring(7);
+            const item = $('<div class="queue-item" id="' + itemId + '"></div>');
+            const progressBar = $('<div class="progress" style="width: 0%"></div>');
+            const cancelButton = $('<button class="cancel-button">' + name + ' - Cancel</button>');
+
+            item.append(progressBar);
+            item.append(cancelButton);
+            $('.queue-content').append(item);
+
+            let progress = 0;
+            const interval = setInterval(function() {
+                progress += 10;
+                progressBar.css('width', progress + '%');
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    progressBar.css('background-color', 'lightgreen');
+                    cancelButton.remove();
+                    URL.revokeObjectURL(url); // Revoke the object
+                    item.append('<div>' + name + ' - Done</div>');
+                }
+            }, 1000);
+
+            cancelButton.click(function() {
+                clearInterval(interval);
+                progressBar.css('background-color', 'red');
+                cancelButton.remove();
+                URL.revokeObjectURL(url); // Revoke the object
+                item.append('<div>' + name + ' - Cancelled</div>');
+            });
+        };
+
+
+        function setupMediaRecorder(stream) {
+            let options = { mimeType: 'video/webm; codecs=vp9' };
+            if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+                console.error(`${options.mimeType} is not supported`);
+                options = { mimeType: 'video/webm; codecs=vp8' };
+                if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+                    console.error(`${options.mimeType} is not supported`);
+                    options = { mimeType: 'video/webm' };
+                }
+            }
+
+            try {
+                mediaRecorder = new MediaRecorder(stream, options);
+            } catch (e) {
+                console.error('Exception while creating MediaRecorder:', e);
+                return;
+            }
+
+            recordedBlobs = [];
+            mediaRecorder.ondataavailable = function(event) {
+                if (event.data && event.data.size > 0) {
+                    recordedBlobs.push(event.data);
+                }
+            };
+            mediaRecorder.onstop = (e) => {
+                const fullBlob = new Blob(recordedBlobs, { 'type' : 'video/webm' });
+                const downloadUrl = window.URL.createObjectURL(fullBlob)
+                console.log({fullBlob})
+                console.log({downloadUrl})
+                video.srcObject = null;  // Disconnect the webcam
+                video.src = downloadUrl;
+                video.loop = true;
+                video.controls = true;
+                video.play();            
+            }
+        }
+
+        function startWebcam() {
+            if (video == null || video.src != null) {
+                video.srcObject = null;
+                video.src = null;
+                video.controls = false;
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        video.srcObject = stream;
+                        setupMediaRecorder(stream);
+                    })
+                    .catch(function(error) {
+                        console.error("Cannot access the camera", error);
+                    });
+            }
+        }
+
+        function stopRecording() {
+            console.log(recordedBlobs);
+            $('#recording').hide()
+            $('#stop').addClass('disabled').prop('disabled', true);
+            $('#record').removeClass('disabled').prop('disabled', false);
+            $('#next').removeClass('disabled').prop('disabled', false);
+
+        }
+
+        $(document).ready(function() {
+            video = document.getElementById('webcam');
+            // Access webcam
+            startWebcam();
+
+            // recording indicator
+            {
+                var element = $("#webcam")
+                var offset = element.offset();
+                var x = offset.left;
+                var y = offset.top;
+                var width = element.width();
+                x = Math.floor(x + width - 30);
+                y = Math.floor(y + 10);          
+                $('#recording').css({
+                    'left': x+'px',  // Change the left position to 100px
+                    'top': y+'px'     // Change the top position to 50px
+                });
+            }
+
+            // Initialize buttons
+            $('#stop').addClass('disabled').prop('disabled', true);
+            $('#next').addClass('disabled').prop('disabled', true);
+
+            $.getJSON('tasks.json', function(data) {
+                tasks = data;
+                loadTask(currentTaskIndex);
+            });
+
+            // Dummy actions for buttons
+            $('#record').click(function() {
+                $(this).addClass('disabled').prop('disabled', true);
+                if (video.src != null) window.URL.revokeObjectURL(video.src);  
+                startWebcam();          
+                setTimeout(function() {
+                    mediaRecorder.start();
+                    $('#recording').show();
+                    console.log('Recording started');
+                    $('#stop').removeClass('disabled').prop('disabled', false);
+
+                    // Automatically stop recording after 30 seconds
+                    setTimeout(() => {
+                        console.log("stop automatic");
+                        if (mediaRecorder.state === "recording") {
+                            mediaRecorder.stop();
+                            stopRecording();
+                        }
+                    }, 30000);
+                }, 1000);
+            });
+
+            $('#stop').click(function() {
+                console.log("stop clicked manually");
+                if (mediaRecorder.state === "recording") {
+                    mediaRecorder.stop();
+                    stopRecording();
+                }
+            });
+
+            $('#skip').click(function() {
+                console.log('Skipped');
+                if (video.src != null) window.URL.revokeObjectURL(video.src);
+                startWebcam();
+                if (currentTaskIndex < tasks.length - 1) {
+                    currentTaskIndex++;
+                    loadTask(currentTaskIndex);
+                    $('#next').addClass('disabled').prop('disabled', true);
+                } else {
+                    $(this).addClass('disabled').prop('disabled', true);
+                }
+            });
+
+            $('#next').click(function() {
+                console.log('Next item');
+                if (video.src != null) {
+                    upload(video.src, tasks[currentTaskIndex].round);
+                    $('.queue-content').show();
+                }
+
+                if (currentTaskIndex < tasks.length - 1) {
+                    currentTaskIndex++;
+                    loadTask(currentTaskIndex);
+                } else {
+                    $(this).addClass('disabled').prop('disabled', true);
+                }
+                startWebcam();
+            });
+
+            $('.queue-header').click(function() {
+                $('.queue-content').toggle();
+            });
+
+        });
+    </script>
+    <h1>Experimental Recording UX</h1>
+    <div class="container">
+        <div id="webcam-container">
+            <div id="recording" class="recording-indicator"></div>
+            <video id="webcam" autoplay playsinline width="640" height="480"></video>
+            <div class="buttons">
+                <button id="record">Record</button>
+                <button id="stop">Stop</button>
+            </div>
+        </div>
+        <div id="instructions-container" class="box">
+            <h2>Instructions</h2>
+            <div id="instructions">
+                Hello
+            </div>
+            <div class="buttons">
+                <button id="skip">Skip</button>
+                <button id="next">Looks Good - Next</button>
+            </div>
+        </div>
+    </div>
+    <div id="upload-queue" class="upload-queue">
+        <div class="queue-header">Upload Queue</div>
+        <div class="queue-content"></div>
+    </div>    
+</body>
+</html>

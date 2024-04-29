@@ -1,0 +1,12 @@
+[
+    {"round": "R1L1", "instructions": ["kitty", "banana", "apple", "rabbit", "house"]},
+    {"round": "R1L2", "instructions": ["dog", "tree", "carrot", "book", "chair"]},
+    {"round": "R1L3", "instructions": ["bird", "orange", "ball", "computer", "table"]},
+    {"round": "R1L4", "instructions": ["fish", "pear", "bike", "keyboard", "lamp"]},
+    {"round": "R1L5", "instructions": ["turtle", "grape", "flower", "monitor", "couch"]},
+    {"round": "R2L1", "instructions": ["elephant", "potato", "sun", "mouse", "bed"]},
+    {"round": "R2L2", "instructions": ["lion", "tomato", "moon", "remote", "bench"]},
+    {"round": "R2L3", "instructions": ["zebra", "lettuce", "star", "headphones", "rug"]},
+    {"round": "R2L4", "instructions": ["giraffe", "cucumber", "planet", "microphone", "curtain"]},
+    {"round": "R2L5", "instructions": ["monkey", "broccoli", "galaxy", "speaker", "shelf"]}
+]
